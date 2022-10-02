@@ -1,1 +1,1 @@
-# neural-network-implementation-from-scratch
+# Neural-Network-implementation-from-scratch
