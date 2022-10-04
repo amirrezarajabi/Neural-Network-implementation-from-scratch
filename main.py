@@ -53,7 +53,7 @@ model = {
     "FC2":FC(5, 1, "FC2", "He")
 }
 
-optimizer = Optimizer("sgd")(model)
+optimizer = Optimizer("sgd")(model, learning_rate=0.01)
 
 criterion = BCE()
 
@@ -78,7 +78,7 @@ for e in tqdm(range(1, 10001)):
         dZ1 = SIGMOID.backward(dA1, Z1)
         dA0, grads1 = model["FC1"].backward(dZ1, A0)
         model["FC2"].update(optimizer, grads2)
-        model["FC2"].update(optimizer, grads2)
+        model["FC1"].update(optimizer, grads1)
         cost += loss / (X.shape[1] // Batch_Size)
     costs.append(cost)
 

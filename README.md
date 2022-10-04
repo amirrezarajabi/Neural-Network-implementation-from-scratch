@@ -4,6 +4,8 @@
 
 *   ##  [layers](./layers/)
     *   ### [Fully Connected](./layers/FullyConnected.py)
+    *   ### [Conv](./layers/Convolution.py)
+    *   ### [Max Poll](./layers/MaxPoolling.py)
 
 *   ##  [losses](./losses/)
     *   ### [Binary Cross Entropy](./losses/BinaryCrossEntropy.py)
@@ -13,5 +15,9 @@
     *   ### [sigmoid](./activations/sigmoid.py)
     *   ### [relu](./activations/sigmoid.py)
 
-*   ##  ![data](./images/data.png)
-*   ##  ![result](./images/result.png)
+*   ##  [test FC](./main.py)
+    *   ### ![data](./images/data.png)
+    *   ### ![result](./images/result.png)
+
+*   ##  [conv test](./conv_main.py)
+    *   ### ![result](./images/plot.png)
