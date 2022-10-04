@@ -14,6 +14,7 @@
 *   ##  [activation functions](./activations/)
     *   ### [sigmoid](./activations/sigmoid.py)
     *   ### [relu](./activations/sigmoid.py)
+    *   ### [linear](./activations/linear.py)
 
 *   ##  [test FC](./main.py)
     *   ### ![data](./images/data.png)
