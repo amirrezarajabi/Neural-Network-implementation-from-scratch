@@ -77,3 +77,8 @@ class MaxPool:
                             shape = (fh, fw)
                             dA_prev[i, vert_start: vert_end, horiz_start: horiz_end, c] += self.distribute_value(dz, shape)
         return dA_prev
+    
+    def output_shape(self, X):
+        shape_ = X.shape
+        shape_[0], shape_[1] = self.target_shape((shape_[0], shape_[1]))
+        return shape_

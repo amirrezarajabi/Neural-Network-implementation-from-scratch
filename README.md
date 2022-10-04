@@ -20,4 +20,5 @@
     *   ### ![result](./images/result.png)
 
 *   ##  [conv test](./conv_main.py)
-    *   ### ![result](./images/plot.png)
+    *   ### ![cost](./images/plot.png)
+    *   ### ![result](./images/conv_result.png)

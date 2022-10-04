@@ -52,7 +52,7 @@ criterion = BCE()
 optimizer = Optimizer("sgd")(model, learning_rate=0.01)
 
 costs = []
-for e in tqdm(range(1, 6)):
+for e in tqdm(range(1, 26)):
     np.random.shuffle(data)
     cost = 0
     for b in range(TOT_STEP):

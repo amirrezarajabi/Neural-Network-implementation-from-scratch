@@ -110,4 +110,8 @@ class Conv:
     def update(self, optimizer, grads):
         self.parameters = optimizer.update(grads, self.name)
         
-
+    def output_shape(self, X):
+        shape_ = X.shape
+        shape_[0], shape_[1] = self.target_shape((shape_[0], shape_[1]))
+        shape_[2] = self.out_channels
+        return shape_

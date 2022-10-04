@@ -46,4 +46,8 @@ class FC:
     
     def update(self, optimizer, grads):
         self.parameters = optimizer.update(grads, self.name)
-
+    
+    def output_shape(self, X):
+        shape_ = X.shape
+        shape_[0] = self.output_size
+        return shape_
