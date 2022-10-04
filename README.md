@@ -1,6 +1,6 @@
 # Neural-Network-implementation-from-scratch
 
-##  implementation of ANN only use `numpy`
+##  implementation of ANN and CNN only use `numpy`
 
 *   ##  [layers](./layers/)
     *   ### [Fully Connected](./layers/FullyConnected.py)
