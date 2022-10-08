@@ -8,6 +8,8 @@ class FC:
         self.name = name
         params = self.initialize(initialize_method)
         self.parameters = [params[0], params[1]]
+        self.input_shape = None
+        self.reshaped_input = None
 
     def initialize(self, initialize_method):
         if initialize_method == "random":
@@ -25,23 +27,33 @@ class FC:
         return None
     
     def forward(self, A_prev):
+        self.input_shape = A_prev.shape
+        A_prev_tmp = np.copy(A_prev)
+        if A_prev.ndim == 4:
+            BS = A_prev.shape[0]
+            A_prev_tmp = A_prev_tmp.reshape(BS, -1).T
+        self.reshaped_input = A_prev_tmp.shape
 
         W, b = self.parameters[0], self.parameters[1]
-        Z = W @ A_prev + b
+        Z = W @ A_prev_tmp + b
 
-        return Z, A_prev
+        return Z
     
 
     def backward(self, dZ, A_prev):
+        A_prev_tmp = np.copy(A_prev)
+        if A_prev.ndim == 4:
+            BS = A_prev.shape[0]
+            A_prev_tmp = A_prev_tmp.reshape(BS, -1).T
 
         W, b = self.parameters[0], self.parameters[1]
         m = A_prev.shape[1]
-        dW = (1 / m) * np.dot(dZ, A_prev.T)
+        dW = (1 / m) * np.dot(dZ, A_prev_tmp.T)
         db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
         dA_prev = np.dot(W.T, dZ)
-        
         grads = [dW, db]
-
+        if len(self.input_shape) == 4:
+            dA_prev = dA_prev.T.reshape(self.input_shape)
         return dA_prev, grads
     
     def update(self, optimizer, grads):

@@ -8,7 +8,7 @@ class Relu:
         A = np.maximum(0,Z)
         cache = Z
     
-        return A, cache
+        return A
 
     def relu_backward(self, dA, cache):
         Z = cache

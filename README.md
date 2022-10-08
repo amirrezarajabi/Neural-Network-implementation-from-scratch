@@ -20,6 +20,6 @@
     *   ### ![data](./images/data.png)
     *   ### ![result](./images/result.png)
 
-*   ##  [conv test](./conv_main.py)
+*   ##  [conv test](./test.py)
     *   ### ![cost](./images/plot.jpg)
     *   ### ![result](./images/conv_result.jpg)

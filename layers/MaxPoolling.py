@@ -40,7 +40,7 @@ class MaxPool:
                             A[i, h, w, c] = np.max(a_prev_slice)
                         elif self.mode == "average":
                             A[i, h, w, c] = np.mean(a_prev_slice)
-        return A, A_prev
+        return A
     
     def create_mask_from_window(self, x):
         mask = x == np.max(x)
@@ -76,7 +76,7 @@ class MaxPool:
                             dz = dZ[i, h, w, c]
                             shape = (fh, fw)
                             dA_prev[i, vert_start: vert_end, horiz_start: horiz_end, c] += self.distribute_value(dz, shape)
-        return dA_prev
+        return dA_prev, None
     
     def output_shape(self, X):
         shape_ = X.shape

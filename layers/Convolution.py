@@ -76,7 +76,7 @@ class Conv:
                         weights = W[:,:,:,c]
                         biases = b[:,:,:,c]
                         Z[i, h, w, c] = self.single_step_conv(a_slice_prev, weights, biases)
-        return Z, A_prev
+        return Z
     
     def backward(self, dZ, A_prev):
         W, b = self.parameters[0], self.parameters[1]

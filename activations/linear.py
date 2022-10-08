@@ -8,7 +8,7 @@ class Linear:
         A = Z
         cache = Z
     
-        return A, cache
+        return A
 
     def linear_backward(self, dA, cache):
         Z = cache

@@ -3,6 +3,7 @@ from activations.activation import Activation
 from optimizers.optimizer import Optimizer
 from losses.BinaryCrossEntropy import BCE
 import matplotlib.pyplot as plt
+from model import Model
 import numpy as np
 from tqdm import tqdm
 
@@ -48,16 +49,18 @@ plt.scatter(X[0, :], X[1, :], c=y, s=40, cmap=plt.cm.Spectral)
 plt.show()
 
 
-model = {
+arch_model = {
     "FC1":FC(2, 5, "FC1", "He"),
-    "FC2":FC(5, 1, "FC2", "He")
+    "S1": Activation("sigmoid")(),
+    "FC2":FC(5, 1, "FC2", "He"),
+    "S2": Activation("sigmoid")()
 }
 
-optimizer = Optimizer("sgd")(model, learning_rate=0.01)
+optimizer = Optimizer("sgd")(arch_model, learning_rate=0.01)
 
 criterion = BCE()
 
-SIGMOID = Activation("sigmoid")()
+model = Model(arch_model, criterion, optimizer)
 
 Batch_Size = 40
 
@@ -67,19 +70,7 @@ for e in tqdm(range(1, 10001)):
     for b in range(X.shape[1] // Batch_Size):
         A0 = X[:, b * Batch_Size:(b + 1) * Batch_Size]
         by = y[:, b * Batch_Size:(b + 1) * Batch_Size]
-        Z1, A0 = model["FC1"].forward(A0)
-        A1, Z1 = SIGMOID.forward(Z1)
-        Z2, A1 = model["FC2"].forward(A1)
-        A2, Z2 = SIGMOID.forward(Z2)
-        loss = criterion.compute_cost(A2, by)
-        dA2 = criterion.backward(A2, by)
-        dZ2 = SIGMOID.backward(dA2, Z2)
-        dA1, grads2 = model["FC2"].backward(dZ2, A1)
-        dZ1 = SIGMOID.backward(dA1, Z1)
-        dA0, grads1 = model["FC1"].backward(dZ1, A0)
-        model["FC2"].update(optimizer, grads2)
-        model["FC1"].update(optimizer, grads1)
-        cost += loss / (X.shape[1] // Batch_Size)
+        cost += model.one_epoch(A0, by, Batch_Size) / (X.shape[1] // Batch_Size)
     costs.append(cost)
 
 plt.plot(costs)
@@ -87,10 +78,7 @@ plt.show()
 
 def predict(test):
     A0 = test
-    Z1, A0 = model["FC1"].forward(A0)
-    A1, Z1 = SIGMOID.forward(Z1)
-    Z2, A1 = model["FC2"].forward(A1)
-    A2, Z2 = SIGMOID.forward(Z2)
+    A2 = model.forward(A0, A0.shape[1])[-1]
     predictions = np.round(A2)
     return predictions
 

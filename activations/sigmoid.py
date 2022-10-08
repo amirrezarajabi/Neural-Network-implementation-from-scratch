@@ -8,7 +8,7 @@ class Sigmoid:
         A = 1/(1+np.exp(-Z))
         cache = Z
     
-        return A, cache
+        return A
 
     def sig_backward(self, dA, cache):
         Z = cache
