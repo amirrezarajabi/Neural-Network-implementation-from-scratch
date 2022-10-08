@@ -16,6 +16,10 @@
     *   ### [relu](./activations/sigmoid.py)
     *   ### [linear](./activations/linear.py)
 
+*   ##  [optimizers](./optimizers/)
+    *   ### [SGD](./optimizers/GradientDescent.py)
+    *   ### [Adam](./optimizers/ADAM.py)
+
 *   ##  [test FC](./main.py)
     *   ### ![data](./images/data.png)
     *   ### ![result](./images/result.png)

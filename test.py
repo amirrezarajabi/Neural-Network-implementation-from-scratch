@@ -62,17 +62,17 @@ costs = []
 for e in tqdm(range(1, 26)):
     np.random.shuffle(data)
     cost = 0
-    for b in tqdm(range(TOT_STEP)):
+    for b in range(TOT_STEP):
         x, y = load_batch(b, data, Batch_Size)
         cost += myModel.one_epoch(x, y, Batch_Size) / TOT_STEP
     costs.append(cost)
 
-plt.imshow(costs)
+plt.plot(costs)
 plt.show()
 
 X, gt = load_batch(0, data, 4)
-Y = myModel.forward(x)[-1]
-fig, ax = plt.subplots(2, 2, figsize=(4, 4))
+Y = myModel.forward(x, 4)[-1]
+fig, ax = plt.subplots(2, 2, figsize=(8, 8))
 ax[0, 0].imshow(X[0].reshape(28, 28), cmap="gray")
 ax[0, 0].set_title(f"{Y[:, 0]} vs {gt[:, 0]}")
 ax[0, 1].imshow(X[1].reshape(28, 28), cmap="gray")
