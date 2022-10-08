@@ -72,7 +72,7 @@ plt.show()
 
 X, gt = load_batch(0, data, 4)
 Y = myModel.forward(x)[-1]
-fig, ax = plt.subplots(2, 2)
+fig, ax = plt.subplots(2, 2, figsize=(4, 4))
 ax[0, 0].imshow(X[0].reshape(28, 28), cmap="gray")
 ax[0, 0].set_title(f"{Y[:, 0]} vs {gt[:, 0]}")
 ax[0, 1].imshow(X[1].reshape(28, 28), cmap="gray")
