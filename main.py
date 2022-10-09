@@ -64,22 +64,11 @@ model = Model(arch_model, criterion, optimizer)
 
 Batch_Size = 40
 
-costs = []
-for e in tqdm(range(1, 10001)):
-    cost = 0
-    for b in range(X.shape[1] // Batch_Size):
-        A0 = X[:, b * Batch_Size:(b + 1) * Batch_Size]
-        by = y[:, b * Batch_Size:(b + 1) * Batch_Size]
-        cost += model.one_epoch(A0, by, Batch_Size) / (X.shape[1] // Batch_Size)
-    costs.append(cost)
-
-plt.plot(costs)
-plt.show()
+model.train(X, y, Batch_Size=Batch_Size, epochs=5000, shuffling=False, verbose=1000, save_after="DB")
 
 def predict(test):
-    A0 = test
-    A2 = model.forward(A0, A0.shape[1])[-1]
-    predictions = np.round(A2)
+    AL = model.predict(test)
+    predictions = np.round(AL)
     return predictions
 
 plot_decision_boundary(lambda x: predict(x.T), X, y)
