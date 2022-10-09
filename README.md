@@ -5,9 +5,9 @@
 *   ##  [layers](./layers/)
     *   ### [Fully Connected](./layers/FullyConnected.py)
         *   ![](./images/FC.gif)
-    *   ### [Conv](./layers/Convolution.py)
+    *   ### [Convolution](./layers/Convolution.py)
         *   ![](./images/conv-gif.gif)
-    *   ### [Max Poll](./layers/MaxPoolling.py)
+    *   ### [Max Pool](./layers/MaxPoolling.py)
         *   ![](./images/maxpool-gif.gif)
 
 *   ##  [losses](./losses/)
